@@ -14,7 +14,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAuth } from '../../hooks/useAuth';
 import { useWorkouts } from '../../hooks/useWorkouts';
-import { saveExercises, uploadExerciseImage, syncSharedExercise } from '../../services/splitsService';
+import { saveExercises, uploadExerciseImage, syncSharedExercise, mirrorCdnImageToStorage } from '../../services/splitsService';
 import { ImagePickerButton } from '../../components/plans/ImagePickerButton';
 import type { PlansStackParamList, ExerciseFormScreenProps } from '../../navigation/types';
 import type { Exercise } from '../../types';
@@ -50,9 +50,9 @@ export function ExerciseFormScreen() {
 
   const [name, setName] = useState(existing?.name ?? template?.name ?? '');
   const [mainWeight, setMainWeight] = useState(String(existing?.mainWeight ?? 0));
-  const [mainRepTarget, setMainRepTarget] = useState(String(existing?.mainRepTarget ?? 5));
+  const [mainRepTarget, setMainRepTarget] = useState(String(existing?.mainRepTarget ?? 8));
   const [backoffWeight, setBackoffWeight] = useState(String(existing?.backoffWeight ?? 0));
-  const [backoffRepTarget, setBackoffRepTarget] = useState(String(existing?.backoffRepTarget ?? 5));
+  const [backoffRepTarget, setBackoffRepTarget] = useState(String(existing?.backoffRepTarget ?? 8));
   const [weightIncrement, setWeightIncrement] = useState(existing?.weightIncrement ?? 5);
   const [customIncrement, setCustomIncrement] = useState(
     INCREMENT_PRESETS.includes(existing?.weightIncrement ?? 5)
@@ -136,6 +136,11 @@ export function ExerciseFormScreen() {
         // Auto-linked — inherit existing shared image if we don't have one
         const matched = workouts.flatMap(w => w.exercises).find(e => e.id === resolvedId);
         finalImageUrl = matched?.imageUrl ?? imageUrl;
+      } else if (finalImageUrl.startsWith(CDN)) {
+        // Mirror CDN template image to Firebase Storage for faster future loads
+        setUploading(true);
+        finalImageUrl = await mirrorCdnImageToStorage(user!.uid, resolvedId, finalImageUrl).catch(() => finalImageUrl);
+        setUploading(false);
       }
 
       // 3. Build exercise data

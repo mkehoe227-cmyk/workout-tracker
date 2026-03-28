@@ -49,3 +49,27 @@ export interface ExerciseTemplate {
   muscle: string;
   hasImage: boolean;
 }
+
+// Phase 4 — Logging
+export interface SessionSet {
+  setType: 'main' | 'backoff';
+  weight: number;
+  reps: number;
+}
+
+export interface SessionExercise {
+  exerciseId: string;
+  name: string;
+  sets: SessionSet[];
+  progressed: boolean;
+  progressedSetTypes: ('main' | 'backoff')[];
+}
+
+export interface WorkoutSession {
+  id: string;
+  workoutId: string;
+  workoutName: string;
+  date: Date;
+  completedAt: Date;
+  exercises: SessionExercise[];
+}

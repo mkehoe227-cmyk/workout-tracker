@@ -130,6 +130,8 @@ const styles = StyleSheet.create({
     color: theme.colors.textPrimary,
     fontSize: 15,
     fontWeight: '600',
+    flex: 1,
+    flexShrink: 1,
   },
   sharedBadge: {
     backgroundColor: theme.colors.accentMuted,

@@ -218,3 +218,20 @@ export async function uploadExerciseImage(
   await uploadBytes(storageRef, blob);
   return getDownloadURL(storageRef);
 }
+
+const CDN_PREFIX = 'https://raw.githubusercontent.com/yuhonas/free-exercise-db';
+
+export async function mirrorCdnImageToStorage(
+  uid: string,
+  exerciseId: string,
+  cdnUrl: string
+): Promise<string> {
+  if (!cdnUrl || cdnUrl.includes('firebasestorage.googleapis.com')) return cdnUrl;
+  if (!cdnUrl.startsWith(CDN_PREFIX)) return cdnUrl;
+
+  const response = await fetch(cdnUrl);
+  const blob = await response.blob();
+  const storageRef = ref(storage, `users/${uid}/exercises/${exerciseId}`);
+  await uploadBytes(storageRef, blob);
+  return getDownloadURL(storageRef);
+}

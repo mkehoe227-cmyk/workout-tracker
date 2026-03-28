@@ -5,6 +5,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import type { AppTabParamList } from './types';
 import { PlansStack } from './PlansStack';
+import { LogStack } from './LogStack';
 import { theme } from '../theme';
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
@@ -18,7 +19,6 @@ function PlaceholderScreen({ label }: { label: string }) {
   );
 }
 
-function LogScreen() { return <PlaceholderScreen label="Log Workout" />; }
 function DashboardScreen() { return <PlaceholderScreen label="Dashboard" />; }
 function ProgressScreen() { return <PlaceholderScreen label="Progress" />; }
 
@@ -44,7 +44,7 @@ export function AppStack() {
     >
       <Tab.Screen name="Dashboard" component={DashboardScreen} />
       <Tab.Screen name="Plans" component={PlansStack} options={{ headerShown: false }} />
-      <Tab.Screen name="Log" component={LogScreen} />
+      <Tab.Screen name="Log" component={LogStack} options={{ headerShown: false }} />
       <Tab.Screen name="Progress" component={ProgressScreen} />
     </Tab.Navigator>
   );

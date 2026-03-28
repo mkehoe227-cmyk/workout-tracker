@@ -1,6 +1,6 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import type { ExerciseTemplate } from '../types';
+import type { ExerciseTemplate, SessionExercise } from '../types';
 
 // Auth stack
 export type AuthStackParamList = {
@@ -27,6 +27,13 @@ export type PlansStackParamList = {
   ExerciseForm: { splitId: string; workoutId: string; exerciseId?: string; template?: ExerciseTemplate };
 };
 
+// Log nested stack
+export type LogStackParamList = {
+  LogHome: undefined;
+  ActiveSession: { splitId: string; workoutId: string; workoutName: string };
+  SessionSummary: { splitId: string; exercises: SessionExercise[]; workoutName: string };
+};
+
 // Screen prop helpers
 export type LoginScreenProps = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 export type RegisterScreenProps = NativeStackScreenProps<AuthStackParamList, 'Register'>;
@@ -37,3 +44,6 @@ export type WorkoutFormScreenProps = NativeStackScreenProps<PlansStackParamList,
 export type WorkoutDetailScreenProps = NativeStackScreenProps<PlansStackParamList, 'WorkoutDetail'>;
 export type ExercisePickerScreenProps = NativeStackScreenProps<PlansStackParamList, 'ExercisePicker'>;
 export type ExerciseFormScreenProps = NativeStackScreenProps<PlansStackParamList, 'ExerciseForm'>;
+export type LogHomeScreenProps = NativeStackScreenProps<LogStackParamList, 'LogHome'>;
+export type ActiveSessionScreenProps = NativeStackScreenProps<LogStackParamList, 'ActiveSession'>;
+export type SessionSummaryScreenProps = NativeStackScreenProps<LogStackParamList, 'SessionSummary'>;

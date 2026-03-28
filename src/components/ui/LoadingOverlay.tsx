@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { theme } from '../../theme';
 
 export function LoadingOverlay() {
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color="#6C63FF" />
+      <ActivityIndicator size="large" color={theme.colors.accent} />
     </View>
   );
 }
@@ -14,6 +15,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0F0F0F',
+    backgroundColor: theme.colors.background,
   },
 });

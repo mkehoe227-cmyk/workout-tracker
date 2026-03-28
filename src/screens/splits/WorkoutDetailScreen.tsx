@@ -16,6 +16,7 @@ import { saveExercises, removeExercise, progressMainWeight, progressBackoffWeigh
 import { ExerciseRow } from '../../components/plans/ExerciseRow';
 import type { PlansStackParamList, WorkoutDetailScreenProps } from '../../navigation/types';
 import type { Exercise } from '../../types';
+import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<PlansStackParamList>;
 
@@ -69,7 +70,7 @@ export function WorkoutDetailScreen() {
   if (loading || !workout) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator color="#6C63FF" />
+        <ActivityIndicator color={theme.colors.accent} />
       </View>
     );
   }
@@ -123,23 +124,23 @@ export function WorkoutDetailScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F0F0F' },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0F0F0F' },
-  headerBtn: { color: '#6C63FF', fontSize: 15, fontWeight: '500' },
-  desc: { color: '#AAA', fontSize: 15, margin: 16, marginBottom: 8 },
+  container: { flex: 1, backgroundColor: theme.colors.background },
+  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.colors.background },
+  headerBtn: { color: theme.colors.accent, fontSize: 15, fontWeight: '500' },
+  desc: { color: theme.colors.textSecondary, fontSize: 15, margin: 16, marginBottom: 8 },
   list: { padding: 16, paddingBottom: 100 },
   empty: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 32 },
-  emptyTitle: { color: '#FFF', fontSize: 20, fontWeight: '700', marginBottom: 8 },
-  emptySub: { color: '#666', fontSize: 15 },
+  emptyTitle: { color: theme.colors.textPrimary, fontSize: 20, fontWeight: '700', marginBottom: 8 },
+  emptySub: { color: theme.colors.textSecondary, fontSize: 15 },
   addBtn: {
     position: 'absolute',
     bottom: 28,
     left: 24,
     right: 24,
-    backgroundColor: '#6C63FF',
-    borderRadius: 12,
+    backgroundColor: theme.colors.accent,
+    borderRadius: 14,
     paddingVertical: 16,
     alignItems: 'center',
   },
-  addBtnText: { color: '#FFF', fontSize: 16, fontWeight: '600' },
+  addBtnText: { color: theme.colors.textOnAccent, fontSize: 16, fontWeight: '600' },
 });

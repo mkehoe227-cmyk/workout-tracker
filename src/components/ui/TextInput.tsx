@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   TextInput as RNTextInput,
@@ -6,19 +6,29 @@ import {
   StyleSheet,
   TextInputProps,
 } from 'react-native';
+import { theme } from '../../theme';
 
 interface LabeledInputProps extends TextInputProps {
   label: string;
   error?: string;
 }
 
-export function TextInput({ label, error, style, ...rest }: LabeledInputProps) {
+export function TextInput({ label, error, style, onFocus, onBlur, ...rest }: LabeledInputProps) {
+  const [focused, setFocused] = useState(false);
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <RNTextInput
-        style={[styles.input, error ? styles.inputError : null, style]}
-        placeholderTextColor="#555"
+        style={[
+          styles.input,
+          focused && styles.inputFocused,
+          error ? styles.inputError : null,
+          style,
+        ]}
+        placeholderTextColor={theme.colors.textTertiary}
+        onFocus={(e) => { setFocused(true); onFocus?.(e); }}
+        onBlur={(e) => { setFocused(false); onBlur?.(e); }}
         {...rest}
       />
       {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -31,7 +41,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   label: {
-    color: '#AAA',
+    color: theme.colors.textSecondary,
     fontSize: 13,
     fontWeight: '500',
     marginBottom: 6,
@@ -39,20 +49,23 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   input: {
-    backgroundColor: '#1C1C1E',
-    color: '#FFF',
-    borderRadius: 10,
+    backgroundColor: theme.colors.surface,
+    color: theme.colors.textPrimary,
+    borderRadius: theme.radii.md,
     height: 50,
     paddingHorizontal: 16,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: '#2C2C2E',
+    borderColor: theme.colors.border,
+  },
+  inputFocused: {
+    borderColor: theme.colors.borderFocus,
   },
   inputError: {
-    borderColor: '#FF453A',
+    borderColor: theme.colors.error,
   },
   error: {
-    color: '#FF453A',
+    color: theme.colors.error,
     fontSize: 12,
     marginTop: 4,
   },

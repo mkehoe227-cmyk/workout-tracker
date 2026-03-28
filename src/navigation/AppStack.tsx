@@ -5,6 +5,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import type { AppTabParamList } from './types';
 import { PlansStack } from './PlansStack';
+import { theme } from '../theme';
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
 
@@ -33,12 +34,12 @@ export function AppStack() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#0F0F0F' },
-        headerTintColor: '#FFF',
+        headerStyle: { backgroundColor: theme.colors.background },
+        headerTintColor: theme.colors.textPrimary,
         headerRight: () => <LogoutButton />,
-        tabBarStyle: { backgroundColor: '#0F0F0F', borderTopColor: '#2C2C2E' },
-        tabBarActiveTintColor: '#6C63FF',
-        tabBarInactiveTintColor: '#666',
+        tabBarStyle: { backgroundColor: theme.colors.background, borderTopColor: theme.colors.border, paddingTop: 4 },
+        tabBarActiveTintColor: theme.colors.accent,
+        tabBarInactiveTintColor: theme.colors.textTertiary,
       }}
     >
       <Tab.Screen name="Dashboard" component={DashboardScreen} />
@@ -54,22 +55,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0F0F0F',
+    backgroundColor: theme.colors.background,
   },
   placeholderText: {
-    color: '#FFF',
+    color: theme.colors.textPrimary,
     fontSize: 24,
     fontWeight: '700',
   },
   placeholderSub: {
-    color: '#666',
+    color: theme.colors.textSecondary,
     marginTop: 8,
   },
   logout: {
     marginRight: 16,
   },
   logoutText: {
-    color: '#6C63FF',
+    color: theme.colors.accent,
     fontSize: 15,
     fontWeight: '500',
   },

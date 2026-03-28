@@ -18,6 +18,7 @@ import { saveExercises, uploadExerciseImage, syncSharedExercise } from '../../se
 import { ImagePickerButton } from '../../components/plans/ImagePickerButton';
 import type { PlansStackParamList, ExerciseFormScreenProps } from '../../navigation/types';
 import type { Exercise } from '../../types';
+import { theme } from '../../theme';
 
 function generateId() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -200,7 +201,8 @@ export function ExerciseFormScreen() {
           value={name}
           onChangeText={setName}
           placeholder="e.g. Barbell Bench Press"
-          placeholderTextColor="#555"
+          placeholderTextColor={theme.colors.textTertiary}
+          color={theme.colors.textPrimary}
         />
 
         <Text style={styles.label}>Sync Across Workouts</Text>
@@ -230,7 +232,8 @@ export function ExerciseFormScreen() {
               onChangeText={setMainWeight}
               keyboardType="decimal-pad"
               placeholder="0"
-              placeholderTextColor="#555"
+              placeholderTextColor={theme.colors.textTertiary}
+              color={theme.colors.textPrimary}
               selectTextOnFocus
             />
           </View>
@@ -242,7 +245,8 @@ export function ExerciseFormScreen() {
               onChangeText={setMainRepTarget}
               keyboardType="number-pad"
               placeholder="5"
-              placeholderTextColor="#555"
+              placeholderTextColor={theme.colors.textTertiary}
+              color={theme.colors.textPrimary}
               selectTextOnFocus
             />
           </View>
@@ -259,7 +263,8 @@ export function ExerciseFormScreen() {
               onChangeText={setBackoffWeight}
               keyboardType="decimal-pad"
               placeholder="0"
-              placeholderTextColor="#555"
+              placeholderTextColor={theme.colors.textTertiary}
+              color={theme.colors.textPrimary}
               selectTextOnFocus
             />
           </View>
@@ -271,7 +276,8 @@ export function ExerciseFormScreen() {
               onChangeText={setBackoffRepTarget}
               keyboardType="number-pad"
               placeholder="5"
-              placeholderTextColor="#555"
+              placeholderTextColor={theme.colors.textTertiary}
+              color={theme.colors.textPrimary}
               selectTextOnFocus
             />
           </View>
@@ -315,7 +321,8 @@ export function ExerciseFormScreen() {
             onChangeText={handleCustomIncrement}
             keyboardType="decimal-pad"
             placeholder="Custom"
-            placeholderTextColor="#555"
+            placeholderTextColor={theme.colors.textTertiary}
+            color={theme.colors.textPrimary}
           />
         </View>
 
@@ -326,7 +333,8 @@ export function ExerciseFormScreen() {
           value={notes}
           onChangeText={setNotes}
           placeholder="Optional notes (e.g. grip width, cues)"
-          placeholderTextColor="#555"
+          placeholderTextColor={theme.colors.textTertiary}
+          color={theme.colors.textPrimary}
           multiline
           numberOfLines={3}
         />
@@ -337,7 +345,7 @@ export function ExerciseFormScreen() {
           disabled={saving || uploading}
         >
           {saving || uploading ? (
-            <ActivityIndicator color="#FFF" />
+            <ActivityIndicator color={theme.colors.textOnAccent} />
           ) : (
             <Text style={styles.saveBtnText}>{isEditing ? 'Save Changes' : 'Add Exercise'}</Text>
           )}
@@ -349,28 +357,33 @@ export function ExerciseFormScreen() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  container: { flex: 1, backgroundColor: '#0F0F0F' },
-  content: { padding: 20, paddingBottom: 40 },
-  error: { color: '#FF453A', marginBottom: 12, fontSize: 14 },
+  container: { flex: 1, backgroundColor: theme.colors.background },
+  content: { padding: theme.spacing.xl, paddingBottom: 40 },
+  error: { color: theme.colors.error, marginBottom: 12, fontSize: 14 },
   sectionHeader: {
-    color: '#6C63FF',
+    color: theme.colors.accent,
     fontSize: 12,
     fontWeight: '700',
     letterSpacing: 0.8,
-    marginTop: 24,
+    marginTop: theme.spacing.xxxl,
     marginBottom: 2,
     textTransform: 'uppercase',
   },
-  label: { color: '#AAA', fontSize: 13, fontWeight: '600', marginBottom: 6, marginTop: 12 },
+  label: {
+    color: theme.colors.textSecondary,
+    fontSize: 13,
+    fontWeight: '600',
+    marginBottom: 6,
+    marginTop: 12,
+  },
   input: {
-    backgroundColor: '#1C1C1E',
-    color: '#FFF',
-    borderRadius: 10,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.md,
     paddingHorizontal: 14,
     paddingVertical: 12,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: '#2C2C2E',
+    borderColor: theme.colors.border,
   },
   multiline: {
     minHeight: 80,
@@ -383,48 +396,47 @@ const styles = StyleSheet.create({
   unitBtn: {
     flex: 1,
     paddingVertical: 12,
-    borderRadius: 10,
+    borderRadius: theme.radii.md,
     borderWidth: 1,
-    borderColor: '#2C2C2E',
+    borderColor: theme.colors.border,
     alignItems: 'center',
-    backgroundColor: '#1C1C1E',
+    backgroundColor: theme.colors.surface,
   },
-  unitBtnActive: { borderColor: '#6C63FF', backgroundColor: '#2C2074' },
-  unitBtnText: { color: '#888', fontSize: 15, fontWeight: '500' },
-  unitBtnTextActive: { color: '#FFF' },
+  unitBtnActive: { borderColor: theme.colors.accent, backgroundColor: theme.colors.accentMuted },
+  unitBtnText: { color: theme.colors.textSecondary, fontSize: 15, fontWeight: '500' },
+  unitBtnTextActive: { color: theme.colors.accent },
   incrementRow: { flexDirection: 'row', gap: 8, alignItems: 'center' },
   incrementBtn: {
     paddingVertical: 12,
     paddingHorizontal: 14,
-    borderRadius: 10,
+    borderRadius: theme.radii.md,
     borderWidth: 1,
-    borderColor: '#2C2C2E',
-    backgroundColor: '#1C1C1E',
+    borderColor: theme.colors.border,
+    backgroundColor: theme.colors.surface,
     alignItems: 'center',
   },
-  incrementBtnActive: { borderColor: '#6C63FF', backgroundColor: '#2C2074' },
-  incrementBtnText: { color: '#888', fontSize: 14, fontWeight: '500' },
-  incrementBtnTextActive: { color: '#FFF' },
+  incrementBtnActive: { borderColor: theme.colors.accent, backgroundColor: theme.colors.accentMuted },
+  incrementBtnText: { color: theme.colors.textSecondary, fontSize: 14, fontWeight: '500' },
+  incrementBtnTextActive: { color: theme.colors.accent },
   incrementInput: {
     flex: 1,
-    backgroundColor: '#1C1C1E',
-    color: '#FFF',
-    borderRadius: 10,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.md,
     paddingHorizontal: 14,
     paddingVertical: 12,
     fontSize: 14,
     borderWidth: 1,
-    borderColor: '#2C2C2E',
+    borderColor: theme.colors.border,
     textAlign: 'center',
   },
-  incrementInputActive: { borderColor: '#6C63FF' },
+  incrementInputActive: { borderColor: theme.colors.accent },
   saveBtn: {
-    backgroundColor: '#6C63FF',
-    borderRadius: 12,
+    backgroundColor: theme.colors.accent,
+    borderRadius: theme.radii.lg,
     paddingVertical: 16,
     alignItems: 'center',
     marginTop: 32,
   },
   saveBtnDisabled: { opacity: 0.6 },
-  saveBtnText: { color: '#FFF', fontSize: 16, fontWeight: '600' },
+  saveBtnText: { color: theme.colors.textOnAccent, fontSize: 16, fontWeight: '600' },
 });

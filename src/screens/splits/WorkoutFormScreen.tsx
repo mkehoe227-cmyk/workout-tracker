@@ -2,7 +2,6 @@ import React, { useState, useLayoutEffect, useMemo } from 'react';
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
@@ -16,6 +15,8 @@ import { useAuth } from '../../hooks/useAuth';
 import { useWorkouts } from '../../hooks/useWorkouts';
 import { createWorkout, updateWorkout } from '../../services/splitsService';
 import type { PlansStackParamList, WorkoutFormScreenProps } from '../../navigation/types';
+import { TextInput } from '../../components/ui/TextInput';
+import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<PlansStackParamList>;
 
@@ -80,25 +81,22 @@ export function WorkoutFormScreen() {
       >
         {error ? <Text style={styles.error}>{error}</Text> : null}
 
-        <Text style={styles.label}>Workout Name *</Text>
         <TextInput
-          style={styles.input}
+          label="Workout Name *"
           value={name}
           onChangeText={setName}
           placeholder="e.g. Push Day, Leg Day, Upper Body"
-          placeholderTextColor="#555"
           autoFocus={!isEditing}
         />
 
-        <Text style={styles.label}>Description</Text>
         <TextInput
-          style={[styles.input, styles.multiline]}
+          label="Description"
           value={description}
           onChangeText={setDescription}
           placeholder="Optional notes about this workout"
-          placeholderTextColor="#555"
           multiline
           numberOfLines={3}
+          style={styles.multiline}
         />
 
         <Pressable
@@ -107,7 +105,7 @@ export function WorkoutFormScreen() {
           disabled={saving}
         >
           {saving ? (
-            <ActivityIndicator color="#FFF" />
+            <ActivityIndicator color={theme.colors.textOnAccent} />
           ) : (
             <Text style={styles.saveBtnText}>{isEditing ? 'Save Changes' : 'Create Workout'}</Text>
           )}
@@ -119,32 +117,21 @@ export function WorkoutFormScreen() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  container: { flex: 1, backgroundColor: '#0F0F0F' },
-  content: { padding: 20 },
-  error: { color: '#FF453A', marginBottom: 12, fontSize: 14 },
-  label: { color: '#AAA', fontSize: 13, fontWeight: '600', marginBottom: 6, marginTop: 16 },
-  input: {
-    backgroundColor: '#1C1C1E',
-    color: '#FFF',
-    borderRadius: 10,
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#2C2C2E',
-  },
+  container: { flex: 1, backgroundColor: theme.colors.background },
+  content: { padding: theme.spacing.xl },
+  error: { color: theme.colors.error, marginBottom: 12, fontSize: 14 },
   multiline: {
     minHeight: 80,
     textAlignVertical: 'top',
     paddingTop: 12,
   },
   saveBtn: {
-    backgroundColor: '#6C63FF',
-    borderRadius: 12,
+    backgroundColor: theme.colors.accent,
+    borderRadius: theme.radii.lg,
     paddingVertical: 16,
     alignItems: 'center',
     marginTop: 32,
   },
   saveBtnDisabled: { opacity: 0.6 },
-  saveBtnText: { color: '#FFF', fontSize: 16, fontWeight: '600' },
+  saveBtnText: { color: theme.colors.textOnAccent, fontSize: 16, fontWeight: '600' },
 });

@@ -9,6 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { theme } from '../../theme';
 
 interface Props {
   imageUri: string | null;
@@ -93,20 +94,21 @@ const styles = StyleSheet.create({
   placeholder: {
     width: 120,
     height: 120,
-    borderRadius: 10,
+    borderRadius: theme.radii.md,
     borderWidth: 1,
-    borderColor: '#444',
+    borderColor: theme.colors.border,
     borderStyle: 'dashed',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
+    marginBottom: theme.spacing.lg,
   },
   placeholderIcon: {
     fontSize: 28,
     marginBottom: 4,
   },
   placeholderText: {
-    color: '#888',
+    color: theme.colors.textSecondary,
     fontSize: 12,
   },
 });

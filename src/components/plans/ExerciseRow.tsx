@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import type { Exercise } from '../../types';
+import { theme } from '../../theme';
 
 interface Props {
   exercise: Exercise;
@@ -87,10 +88,13 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#1C1C1E',
-    borderRadius: 10,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.md,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
+    borderWidth: 1,
+    borderBottomWidth: 0,
+    borderColor: theme.colors.border,
     padding: 12,
   },
   thumb: {
@@ -103,13 +107,13 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 8,
-    backgroundColor: '#2C2C2E',
+    backgroundColor: theme.colors.surfaceRaised,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
   },
   thumbInitial: {
-    color: '#6C63FF',
+    color: theme.colors.accent,
     fontSize: 20,
     fontWeight: '700',
   },
@@ -123,38 +127,40 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   name: {
-    color: '#FFF',
+    color: theme.colors.textPrimary,
     fontSize: 15,
     fontWeight: '600',
   },
   sharedBadge: {
-    backgroundColor: '#2C2074',
+    backgroundColor: theme.colors.accentMuted,
     borderRadius: 4,
+    borderWidth: 1,
+    borderColor: theme.colors.accentDim,
     paddingHorizontal: 5,
     paddingVertical: 2,
   },
   sharedBadgeText: {
-    color: '#6C63FF',
+    color: theme.colors.accent,
     fontSize: 9,
     fontWeight: '700',
     letterSpacing: 0.6,
   },
   setLabel: {
-    color: '#666',
+    color: theme.colors.textTertiary,
     fontSize: 12,
     fontWeight: '600',
   },
   setLine: {
-    color: '#CCC',
+    color: theme.colors.textSecondary,
     fontSize: 13,
     marginBottom: 1,
   },
   goal: {
-    color: '#555',
+    color: theme.colors.textTertiary,
     fontSize: 11,
   },
   target: {
-    color: '#555',
+    color: theme.colors.textTertiary,
     fontSize: 11,
     marginTop: 3,
   },
@@ -166,26 +172,26 @@ const styles = StyleSheet.create({
   },
   arrowBtn: { padding: 4 },
   arrowDisabled: { opacity: 0.2 },
-  arrow: { color: '#888', fontSize: 12 },
+  arrow: { color: theme.colors.textTertiary, fontSize: 12 },
   deleteBtn: { padding: 4 },
-  deleteText: { color: '#FF453A', fontSize: 14 },
+  deleteText: { color: theme.colors.error, fontSize: 14 },
   progressRow: {
     flexDirection: 'row',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: theme.radii.md,
+    borderBottomRightRadius: theme.radii.md,
     overflow: 'hidden',
   },
   progressBtn: {
     flex: 1,
-    backgroundColor: '#1A3A1A',
+    backgroundColor: theme.colors.successSurface,
     paddingVertical: 9,
     alignItems: 'center',
     borderWidth: 1,
     borderTopWidth: 0,
-    borderColor: '#2E6B2E',
+    borderColor: theme.colors.successBorder,
   },
   progressText: {
-    color: '#4CAF50',
+    color: theme.colors.success,
     fontSize: 13,
     fontWeight: '600',
   },

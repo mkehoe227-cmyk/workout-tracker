@@ -7,6 +7,7 @@ import {
   PressableProps,
   ViewStyle,
 } from 'react-native';
+import { theme } from '../../theme';
 
 interface ButtonProps extends PressableProps {
   title: string;
@@ -29,7 +30,7 @@ export function Button({ title, loading, variant = 'primary', style, disabled, .
       {...rest}
     >
       {loading ? (
-        <ActivityIndicator color={isOutline ? '#6C63FF' : '#fff'} />
+        <ActivityIndicator color={isOutline ? theme.colors.accent : theme.colors.textOnAccent} />
       ) : (
         <Text style={[styles.text, isOutline && styles.textOutline]}>{title}</Text>
       )}
@@ -40,28 +41,28 @@ export function Button({ title, loading, variant = 'primary', style, disabled, .
 const styles = StyleSheet.create({
   base: {
     height: 52,
-    borderRadius: 12,
+    borderRadius: theme.radii.lg,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 24,
   },
   primary: {
-    backgroundColor: '#6C63FF',
+    backgroundColor: theme.colors.accent,
   },
   outline: {
     backgroundColor: 'transparent',
     borderWidth: 1.5,
-    borderColor: '#6C63FF',
+    borderColor: theme.colors.accent,
   },
   pressed: {
     opacity: 0.65,
   },
   text: {
-    color: '#fff',
+    color: theme.colors.textOnAccent,
     fontSize: 16,
     fontWeight: '600',
   },
   textOutline: {
-    color: '#6C63FF',
+    color: theme.colors.accent,
   },
 });

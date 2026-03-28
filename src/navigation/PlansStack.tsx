@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { theme } from '../theme';
 import type { PlansStackParamList } from './types';
 import { SplitsListScreen } from '../screens/splits/SplitsListScreen';
 import { SplitFormScreen } from '../screens/splits/SplitFormScreen';
@@ -15,10 +16,10 @@ export function PlansStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#0F0F0F' },
-        headerTintColor: '#FFF',
+        headerStyle: { backgroundColor: theme.colors.background },
+        headerTintColor: theme.colors.textPrimary,
         headerBackTitle: 'Back',
-        contentStyle: { backgroundColor: '#0F0F0F' },
+        contentStyle: { backgroundColor: theme.colors.background },
       }}
     >
       <Stack.Screen name="SplitsList" component={SplitsListScreen} options={{ title: 'My Splits' }} />

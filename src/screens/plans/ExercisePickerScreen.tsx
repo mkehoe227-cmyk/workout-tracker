@@ -12,6 +12,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import exerciseData from '../../data/exercises.json';
 import type { PlansStackParamList, ExercisePickerScreenProps } from '../../navigation/types';
 import type { ExerciseTemplate } from '../../types';
+import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<PlansStackParamList>;
 
@@ -44,7 +45,7 @@ export function ExercisePickerScreen() {
         value={query}
         onChangeText={setQuery}
         placeholder="Search exercises or muscle..."
-        placeholderTextColor="#555"
+        placeholderTextColor={theme.colors.textTertiary}
         autoFocus
         clearButtonMode="while-editing"
       />
@@ -78,17 +79,17 @@ export function ExercisePickerScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F0F0F' },
+  container: { flex: 1, backgroundColor: theme.colors.background },
   search: {
-    backgroundColor: '#1C1C1E',
-    color: '#FFF',
-    borderRadius: 10,
+    backgroundColor: theme.colors.surface,
+    color: theme.colors.textPrimary,
+    borderRadius: theme.radii.md,
     paddingHorizontal: 14,
     paddingVertical: 11,
     fontSize: 16,
     margin: 16,
     borderWidth: 1,
-    borderColor: '#2C2C2E',
+    borderColor: theme.colors.border,
   },
   list: { paddingHorizontal: 16, paddingBottom: 32 },
   customRow: {
@@ -98,15 +99,15 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   customIcon: { fontSize: 18, marginRight: 12 },
-  customText: { color: '#6C63FF', fontSize: 16, fontWeight: '500' },
+  customText: { color: theme.colors.accent, fontSize: 16, fontWeight: '500' },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 13,
   },
   rowInfo: { flex: 1 },
-  rowName: { color: '#FFF', fontSize: 16 },
-  rowMuscle: { color: '#888', fontSize: 13, marginTop: 2 },
-  arrow: { color: '#555', fontSize: 20 },
-  separator: { height: 1, backgroundColor: '#2C2C2E' },
+  rowName: { color: theme.colors.textPrimary, fontSize: 16 },
+  rowMuscle: { color: theme.colors.textSecondary, fontSize: 13, marginTop: 2 },
+  arrow: { color: theme.colors.textTertiary, fontSize: 20 },
+  separator: { height: 1, backgroundColor: theme.colors.separator },
 });

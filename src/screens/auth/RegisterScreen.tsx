@@ -13,6 +13,7 @@ import { auth, db } from '../../config/firebase';
 import { Button } from '../../components/ui/Button';
 import { TextInput } from '../../components/ui/TextInput';
 import type { RegisterScreenProps } from '../../navigation/types';
+import { theme } from '../../theme';
 
 function friendlyError(code: string): string {
   switch (code) {
@@ -103,25 +104,25 @@ export function RegisterScreen({ navigation }: RegisterScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  flex: { flex: 1, backgroundColor: '#0F0F0F' },
+  flex: { flex: 1, backgroundColor: theme.colors.background },
   container: {
     flexGrow: 1,
     justifyContent: 'center',
     padding: 24,
   },
   title: {
-    color: '#FFF',
-    fontSize: 32,
-    fontWeight: '700',
+    color: theme.colors.textPrimary,
+    fontSize: theme.typography.sizes.display,
+    fontWeight: theme.typography.weights.bold,
     marginBottom: 6,
   },
   subtitle: {
-    color: '#888',
-    fontSize: 16,
+    color: theme.colors.textSecondary,
+    fontSize: theme.typography.sizes.md,
     marginBottom: 40,
   },
   form: {
-    gap: 4,
+    gap: 0,
   },
   button: {
     marginTop: 8,

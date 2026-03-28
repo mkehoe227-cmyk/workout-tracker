@@ -16,6 +16,7 @@ import { useWorkouts } from '../../hooks/useWorkouts';
 import { deleteSplit, deleteWorkout } from '../../services/splitsService';
 import type { PlansStackParamList, SplitDetailScreenProps } from '../../navigation/types';
 import type { Workout } from '../../types';
+import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<PlansStackParamList>;
 
@@ -43,7 +44,7 @@ export function SplitDetailScreen() {
               <Text style={styles.headerBtn}>Edit</Text>
             </Pressable>
             <Pressable hitSlop={8} onPress={handleDeleteSplit}>
-              <Text style={[styles.headerBtn, { color: '#FF453A' }]}>Delete</Text>
+              <Text style={[styles.headerBtn, { color: theme.colors.error }]}>Delete</Text>
             </Pressable>
           </View>
         ),
@@ -85,7 +86,7 @@ export function SplitDetailScreen() {
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator color="#6C63FF" />
+        <ActivityIndicator color={theme.colors.accent} />
       </View>
     );
   }
@@ -153,28 +154,30 @@ function WorkoutCard({
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F0F0F' },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0F0F0F' },
-  headerBtn: { color: '#6C63FF', fontSize: 15, fontWeight: '500' },
-  desc: { color: '#AAA', fontSize: 15, margin: 16, marginBottom: 8 },
+  container: { flex: 1, backgroundColor: theme.colors.background },
+  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.colors.background },
+  headerBtn: { color: theme.colors.accent, fontSize: 15, fontWeight: '500' },
+  desc: { color: theme.colors.textSecondary, fontSize: 15, margin: 16, marginBottom: 8 },
   list: { padding: 16, paddingBottom: 100 },
   empty: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 32 },
-  emptyTitle: { color: '#FFF', fontSize: 20, fontWeight: '700', marginBottom: 8 },
-  emptySub: { color: '#666', fontSize: 15 },
+  emptyTitle: { color: theme.colors.textPrimary, fontSize: 20, fontWeight: '700', marginBottom: 8 },
+  emptySub: { color: theme.colors.textSecondary, fontSize: 15 },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#1C1C1E',
-    borderRadius: 12,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.lg,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
     padding: 16,
     marginBottom: 12,
   },
   cardMain: { flex: 1 },
-  cardName: { color: '#FFF', fontSize: 16, fontWeight: '600' },
-  cardMeta: { color: '#888', fontSize: 13, marginTop: 3 },
+  cardName: { color: theme.colors.textPrimary, fontSize: 16, fontWeight: '600' },
+  cardMeta: { color: theme.colors.textSecondary, fontSize: 13, marginTop: 3 },
   deleteBtn: { padding: 4, marginRight: 8 },
-  deleteText: { color: '#FF453A', fontSize: 15 },
-  cardArrow: { color: '#555', fontSize: 22 },
+  deleteText: { color: theme.colors.error, fontSize: 15 },
+  cardArrow: { color: theme.colors.textTertiary, fontSize: 22 },
   fab: {
     position: 'absolute',
     bottom: 28,
@@ -182,14 +185,12 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#6C63FF',
+    backgroundColor: theme.colors.accent,
+    borderWidth: 1,
+    borderColor: theme.colors.accentDim,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#6C63FF',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.5,
-    shadowRadius: 8,
-    elevation: 8,
+    ...theme.shadows.fabGold,
   },
-  fabText: { color: '#FFF', fontSize: 28, lineHeight: 32 },
+  fabText: { color: theme.colors.textOnAccent, fontSize: 28, lineHeight: 32 },
 });

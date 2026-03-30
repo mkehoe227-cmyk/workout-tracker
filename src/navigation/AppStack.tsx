@@ -6,6 +6,7 @@ import { auth } from '../config/firebase';
 import type { AppTabParamList } from './types';
 import { PlansStack } from './PlansStack';
 import { LogStack } from './LogStack';
+import { DashboardScreen } from '../screens/dashboard/DashboardScreen';
 import { theme } from '../theme';
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
@@ -19,7 +20,6 @@ function PlaceholderScreen({ label }: { label: string }) {
   );
 }
 
-function DashboardScreen() { return <PlaceholderScreen label="Dashboard" />; }
 function ProgressScreen() { return <PlaceholderScreen label="Progress" />; }
 
 function LogoutButton() {

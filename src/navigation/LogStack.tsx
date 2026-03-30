@@ -20,7 +20,7 @@ export function LogStack() {
     >
       <Stack.Screen name="LogHome" component={LogHomeScreen} options={{ title: 'Log Workout' }} />
       <Stack.Screen name="ActiveSession" component={ActiveSessionScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="SessionSummary" component={SessionSummaryScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="SessionSummary" component={SessionSummaryScreen} options={{ headerShown: false, gestureEnabled: false }} />
     </Stack.Navigator>
   );
 }

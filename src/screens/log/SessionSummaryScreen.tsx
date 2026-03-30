@@ -96,7 +96,7 @@ export function SessionSummaryScreen() {
       </ScrollView>
 
       <View style={styles.footer}>
-        <Pressable style={styles.doneBtn} onPress={() => nav.navigate('LogHome')}>
+        <Pressable style={styles.doneBtn} onPress={() => nav.popToTop()}>
           <Text style={styles.doneBtnText}>Done</Text>
         </Pressable>
       </View>

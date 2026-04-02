@@ -13,7 +13,6 @@ export type AppTabParamList = {
   Plans: undefined;
   Log: undefined;
   Dashboard: undefined;
-  Progress: undefined;
 };
 
 // Plans nested stack

@@ -23,10 +23,10 @@ export function AppStack() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: theme.colors.background },
+        headerStyle: { backgroundColor: theme.colors.gradientStart },
         headerTintColor: theme.colors.textPrimary,
         headerRight: () => <LogoutButton />,
-        tabBarStyle: { backgroundColor: theme.colors.background, borderTopColor: theme.colors.border, paddingTop: 4 },
+        tabBarStyle: { backgroundColor: theme.colors.gradientStart, borderTopColor: theme.colors.border, paddingTop: 4 },
         tabBarActiveTintColor: theme.colors.accent,
         tabBarInactiveTintColor: theme.colors.textTertiary,
       }}

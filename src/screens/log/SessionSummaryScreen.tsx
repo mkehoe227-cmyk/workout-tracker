@@ -10,6 +10,7 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { LogStackParamList, SessionSummaryScreenProps } from '../../navigation/types';
+import { GradientBackground } from '../../components/GradientBackground';
 import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<LogStackParamList>;
@@ -44,6 +45,7 @@ export function SessionSummaryScreen() {
   }
 
   return (
+    <GradientBackground>
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         {/* Header */}
@@ -101,11 +103,12 @@ export function SessionSummaryScreen() {
         </Pressable>
       </View>
     </SafeAreaView>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.background },
+  container: { flex: 1 },
   content: {
     padding: theme.spacing.screenPad,
     paddingBottom: 40,
@@ -234,7 +237,7 @@ const styles = StyleSheet.create({
     borderTopColor: theme.colors.border,
   },
   doneBtn: {
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.buttonPrimary,
     borderRadius: theme.radii.lg,
     paddingVertical: 16,
     alignItems: 'center',

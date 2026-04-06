@@ -12,6 +12,8 @@ import { useNavigation } from '@react-navigation/native';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import type { AppTabParamList } from '../../navigation/types';
 import { useDashboard } from '../../hooks/useDashboard';
+import { GradientBackground } from '../../components/GradientBackground';
+import { GlowCard } from '../../components/GlowCard';
 import { theme } from '../../theme';
 import type { WorkoutSession } from '../../types';
 
@@ -53,25 +55,30 @@ export function DashboardScreen() {
 
   if (loading) {
     return (
-      <SafeAreaView style={styles.loadingContainer}>
-        <ActivityIndicator color={theme.colors.accent} size="large" />
-      </SafeAreaView>
+      <GradientBackground>
+        <SafeAreaView style={styles.loadingContainer}>
+          <ActivityIndicator color={theme.colors.accent} size="large" />
+        </SafeAreaView>
+      </GradientBackground>
     );
   }
 
   if (isEmpty) {
     return (
-      <SafeAreaView style={styles.emptyContainer}>
-        <Text style={styles.emptyTitle}>Welcome to Workout Tracker</Text>
-        <Text style={styles.emptySub}>Log your first workout to see stats here.</Text>
-        <Pressable style={styles.emptyBtn} onPress={() => nav.navigate('Log')}>
-          <Text style={styles.emptyBtnText}>Start a Workout</Text>
-        </Pressable>
-      </SafeAreaView>
+      <GradientBackground>
+        <SafeAreaView style={styles.emptyContainer}>
+          <Text style={styles.emptyTitle}>Welcome to Workout Tracker</Text>
+          <Text style={styles.emptySub}>Log your first workout to see stats here.</Text>
+          <Pressable style={styles.emptyBtn} onPress={() => nav.navigate('Log')}>
+            <Text style={styles.emptyBtnText}>Start a Workout</Text>
+          </Pressable>
+        </SafeAreaView>
+      </GradientBackground>
     );
   }
 
   return (
+    <GradientBackground>
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         {/* Welcome header */}
@@ -83,7 +90,7 @@ export function DashboardScreen() {
         </View>
 
         {/* Weekly stats */}
-        <View style={styles.statsRow}>
+        <GlowCard style={styles.statsRowGlow} innerStyle={styles.statsRowInner}>
           <View style={styles.statBox}>
             <Text style={styles.statValue}>{sessionsThisWeek}</Text>
             <Text style={styles.statLabel}>Sessions{'\n'}this week</Text>
@@ -93,7 +100,7 @@ export function DashboardScreen() {
             <Text style={styles.statValue}>{progressionsThisWeek}</Text>
             <Text style={styles.statLabel}>Progressions{'\n'}this week</Text>
           </View>
-        </View>
+        </GlowCard>
 
         {/* Quick-start */}
         {nextWorkout && (
@@ -118,34 +125,33 @@ export function DashboardScreen() {
         {recentSessions.length > 0 && (
           <View style={styles.recentSection}>
             <Text style={styles.sectionTitle}>Recent Sessions</Text>
-            <View style={styles.sessionCard}>
+            <GlowCard innerStyle={styles.sessionCardInner}>
               {recentSessions.map((s, i) => (
                 <View key={s.id}>
                   {i > 0 && <View style={styles.separator} />}
                   <SessionRow session={s} />
                 </View>
               ))}
-            </View>
+            </GlowCard>
           </View>
         )}
       </ScrollView>
     </SafeAreaView>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.background },
+  container: { flex: 1 },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.colors.background,
   },
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.colors.background,
     padding: theme.spacing.screenPad,
   },
   emptyTitle: {
@@ -162,7 +168,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   emptyBtn: {
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.buttonPrimary,
     borderRadius: theme.radii.lg,
     paddingVertical: 14,
     paddingHorizontal: 32,
@@ -190,13 +196,11 @@ const styles = StyleSheet.create({
     color: theme.colors.textSecondary,
     fontSize: theme.typography.sizes.body,
   },
-  statsRow: {
-    flexDirection: 'row',
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radii.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
+  statsRowGlow: {
     marginBottom: theme.spacing.lg,
+  },
+  statsRowInner: {
+    flexDirection: 'row',
     overflow: 'hidden',
   },
   statBox: {
@@ -221,7 +225,7 @@ const styles = StyleSheet.create({
     lineHeight: 17,
   },
   quickStartBtn: {
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.buttonPrimary,
     borderRadius: theme.radii.lg,
     paddingVertical: 16,
     alignItems: 'center',
@@ -243,11 +247,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     marginBottom: theme.spacing.md,
   },
-  sessionCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radii.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
+  sessionCardInner: {
     overflow: 'hidden',
   },
   sessionRow: {

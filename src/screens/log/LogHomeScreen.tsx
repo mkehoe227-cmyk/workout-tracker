@@ -14,6 +14,8 @@ import { useSplits } from '../../hooks/useSplits';
 import { useWorkouts } from '../../hooks/useWorkouts';
 import type { LogStackParamList } from '../../navigation/types';
 import type { Split, Workout } from '../../types';
+import { GradientBackground } from '../../components/GradientBackground';
+import { GlowCard } from '../../components/GlowCard';
 import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<LogStackParamList>;
@@ -79,7 +81,7 @@ function SplitSection({
   onStartWorkout: (workout: Workout) => void;
 }) {
   return (
-    <View style={styles.splitSection}>
+    <GlowCard style={styles.splitSectionGlow} innerStyle={styles.splitSectionInner}>
       <Pressable style={styles.splitHeader} onPress={onToggle}>
         <Text style={styles.splitName}>{split.name}</Text>
         <Text style={styles.chevron}>{expanded ? '∨' : '›'}</Text>
@@ -89,7 +91,7 @@ function SplitSection({
           <WorkoutList uid={uid} splitId={split.id} onStart={onStartWorkout} />
         </View>
       )}
-    </View>
+    </GlowCard>
   );
 }
 
@@ -113,22 +115,27 @@ export function LogHomeScreen() {
 
   if (loading) {
     return (
-      <View style={styles.center}>
-        <ActivityIndicator color={theme.colors.accent} />
-      </View>
+      <GradientBackground>
+        <View style={styles.center}>
+          <ActivityIndicator color={theme.colors.accent} />
+        </View>
+      </GradientBackground>
     );
   }
 
   if (splits.length === 0) {
     return (
-      <View style={styles.center}>
-        <Text style={styles.emptyTitle}>No splits yet</Text>
-        <Text style={styles.emptySub}>Create a split in the Plans tab first</Text>
-      </View>
+      <GradientBackground>
+        <View style={styles.center}>
+          <Text style={styles.emptyTitle}>No splits yet</Text>
+          <Text style={styles.emptySub}>Create a split in the Plans tab first</Text>
+        </View>
+      </GradientBackground>
     );
   }
 
   return (
+    <GradientBackground>
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       {splits.map(split => (
         <SplitSection
@@ -141,17 +148,17 @@ export function LogHomeScreen() {
         />
       ))}
     </ScrollView>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.background },
+  container: { flex: 1 },
   content: { padding: theme.spacing.screenPad, paddingBottom: 40 },
   center: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.colors.background,
     padding: 32,
   },
   emptyTitle: {
@@ -161,12 +168,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   emptySub: { color: theme.colors.textSecondary, fontSize: theme.typography.sizes.body },
-  splitSection: {
+  splitSectionGlow: {
     marginBottom: 12,
-    borderRadius: theme.radii.lg,
-    backgroundColor: theme.colors.surface,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
+  },
+  splitSectionInner: {
     overflow: 'hidden',
   },
   splitHeader: {

@@ -12,6 +12,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import exerciseData from '../../data/exercises.json';
 import type { PlansStackParamList, ExercisePickerScreenProps } from '../../navigation/types';
 import type { ExerciseTemplate } from '../../types';
+import { GradientBackground } from '../../components/GradientBackground';
 import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<PlansStackParamList>;
@@ -39,6 +40,7 @@ export function ExercisePickerScreen() {
   }
 
   return (
+    <GradientBackground>
     <View style={styles.container}>
       <TextInput
         style={styles.search}
@@ -75,11 +77,12 @@ export function ExercisePickerScreen() {
         contentContainerStyle={styles.list}
       />
     </View>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.background },
+  container: { flex: 1 },
   search: {
     backgroundColor: theme.colors.surface,
     color: theme.colors.textPrimary,

@@ -16,6 +16,7 @@ import { useWorkouts } from '../../hooks/useWorkouts';
 import { createWorkout, updateWorkout } from '../../services/splitsService';
 import type { PlansStackParamList, WorkoutFormScreenProps } from '../../navigation/types';
 import { TextInput } from '../../components/ui/TextInput';
+import { GradientBackground } from '../../components/GradientBackground';
 import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<PlansStackParamList>;
@@ -70,6 +71,7 @@ export function WorkoutFormScreen() {
   }
 
   return (
+    <GradientBackground>
     <KeyboardAvoidingView
       style={styles.flex}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -112,12 +114,13 @@ export function WorkoutFormScreen() {
         </Pressable>
       </ScrollView>
     </KeyboardAvoidingView>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  container: { flex: 1, backgroundColor: theme.colors.background },
+  container: { flex: 1 },
   content: { padding: theme.spacing.xl },
   error: { color: theme.colors.error, marginBottom: 12, fontSize: 14 },
   multiline: {
@@ -126,7 +129,7 @@ const styles = StyleSheet.create({
     paddingTop: 12,
   },
   saveBtn: {
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.buttonPrimary,
     borderRadius: theme.radii.lg,
     paddingVertical: 16,
     alignItems: 'center',

@@ -1,16 +1,19 @@
 import { Platform } from 'react-native';
 
 const colors = {
-  // Backgrounds (layered depth)
+  // Backgrounds (layered depth — semi-transparent for glass effect)
   background: '#0A1628',
-  surface: '#0F2040',
-  surfaceRaised: '#142850',
-  surfaceDim: '#071020',
+  surface: 'rgba(15, 32, 64, 0.45)',
+  surfaceRaised: 'rgba(20, 40, 80, 0.55)',
+  surfaceDim: 'rgba(7, 16, 32, 0.6)',
 
   // Accent
   accent: '#5BA3D9',
-  accentMuted: '#0D2B4A',
+  accentMuted: 'rgba(13, 43, 74, 0.6)',
   accentDim: '#2A6090',
+
+  // Primary button
+  buttonPrimary: '#4682B4',
 
   // Text
   textPrimary: '#F0EDE8',
@@ -20,15 +23,19 @@ const colors = {
 
   // Semantic
   error: '#FF6B6B',
-  errorSurface: '#1F0A0A',
+  errorSurface: 'rgba(31, 10, 10, 0.6)',
   success: '#5BA3D9',
-  successSurface: '#0D2B4A',
-  successBorder: '#1E5080',
+  successSurface: 'rgba(13, 43, 74, 0.5)',
+  successBorder: 'rgba(30, 80, 128, 0.6)',
 
-  // Borders
-  border: '#1C3055',
-  borderFocus: '#5BA3D9',
-  separator: '#112238',
+  // Borders (subtle white glow for glass edges)
+  border: 'rgba(255, 255, 255, 0.08)',
+  borderFocus: 'rgba(91, 163, 217, 0.6)',
+  separator: 'rgba(255, 255, 255, 0.04)',
+
+  // Gradient
+  gradientStart: '#0A1628',
+  gradientEnd: '#1B3A5C',
 } as const;
 
 const spacing = {
@@ -87,7 +94,7 @@ const shadows = {
     elevation: 3,
   },
   fabGold: {
-    shadowColor: '#5BA3D9',
+    shadowColor: '#4682B4',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.30,
     shadowRadius: 10,

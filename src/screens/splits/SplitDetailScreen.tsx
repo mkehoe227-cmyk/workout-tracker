@@ -16,6 +16,8 @@ import { useWorkouts } from '../../hooks/useWorkouts';
 import { deleteSplit, deleteWorkout } from '../../services/splitsService';
 import type { PlansStackParamList, SplitDetailScreenProps } from '../../navigation/types';
 import type { Workout } from '../../types';
+import { GradientBackground } from '../../components/GradientBackground';
+import { GlowCard } from '../../components/GlowCard';
 import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<PlansStackParamList>;
@@ -85,13 +87,16 @@ export function SplitDetailScreen() {
 
   if (loading) {
     return (
-      <View style={styles.center}>
-        <ActivityIndicator color={theme.colors.accent} />
-      </View>
+      <GradientBackground>
+        <View style={styles.center}>
+          <ActivityIndicator color={theme.colors.accent} />
+        </View>
+      </GradientBackground>
     );
   }
 
   return (
+    <GradientBackground>
     <View style={styles.container}>
       {split?.description ? (
         <Text style={styles.desc}>{split.description}</Text>
@@ -124,6 +129,7 @@ export function SplitDetailScreen() {
         <Text style={styles.fabText}>+</Text>
       </Pressable>
     </View>
+    </GradientBackground>
   );
 }
 
@@ -138,39 +144,39 @@ function WorkoutCard({
 }) {
   const count = workout.exercises.length;
   return (
-    <Pressable style={styles.card} onPress={onPress}>
-      <View style={styles.cardMain}>
-        <Text style={styles.cardName}>{workout.name}</Text>
-        <Text style={styles.cardMeta}>
-          {count} {count === 1 ? 'exercise' : 'exercises'}
-        </Text>
-      </View>
-      <Pressable onPress={onDelete} hitSlop={8} style={styles.deleteBtn}>
-        <Text style={styles.deleteText}>✕</Text>
+    <GlowCard style={styles.cardGlow}>
+      <Pressable style={styles.card} onPress={onPress}>
+        <View style={styles.cardMain}>
+          <Text style={styles.cardName}>{workout.name}</Text>
+          <Text style={styles.cardMeta}>
+            {count} {count === 1 ? 'exercise' : 'exercises'}
+          </Text>
+        </View>
+        <Pressable onPress={onDelete} hitSlop={8} style={styles.deleteBtn}>
+          <Text style={styles.deleteText}>✕</Text>
+        </Pressable>
+        <Text style={styles.cardArrow}>›</Text>
       </Pressable>
-      <Text style={styles.cardArrow}>›</Text>
-    </Pressable>
+    </GlowCard>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.background },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.colors.background },
+  container: { flex: 1 },
+  center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   headerBtn: { color: theme.colors.accent, fontSize: 15, fontWeight: '500' },
   desc: { color: theme.colors.textSecondary, fontSize: 15, margin: 16, marginBottom: 8 },
   list: { padding: 16, paddingBottom: 100 },
   empty: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 32 },
   emptyTitle: { color: theme.colors.textPrimary, fontSize: 20, fontWeight: '700', marginBottom: 8 },
   emptySub: { color: theme.colors.textSecondary, fontSize: 15 },
+  cardGlow: {
+    marginBottom: 12,
+  },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radii.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
     padding: 16,
-    marginBottom: 12,
   },
   cardMain: { flex: 1 },
   cardName: { color: theme.colors.textPrimary, fontSize: 16, fontWeight: '600' },
@@ -185,7 +191,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.buttonPrimary,
     borderWidth: 1,
     borderColor: theme.colors.accentDim,
     justifyContent: 'center',

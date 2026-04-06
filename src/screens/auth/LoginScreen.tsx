@@ -11,6 +11,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 import { Button } from '../../components/ui/Button';
 import { TextInput } from '../../components/ui/TextInput';
+import { GradientBackground } from '../../components/GradientBackground';
 import type { LoginScreenProps } from '../../navigation/types';
 import { theme } from '../../theme';
 
@@ -44,6 +45,7 @@ export function LoginScreen({ navigation }: LoginScreenProps) {
   }
 
   return (
+    <GradientBackground>
     <KeyboardAvoidingView
       style={styles.flex}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -82,11 +84,12 @@ export function LoginScreen({ navigation }: LoginScreenProps) {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  flex: { flex: 1, backgroundColor: theme.colors.background },
+  flex: { flex: 1 },
   container: {
     flexGrow: 1,
     justifyContent: 'center',

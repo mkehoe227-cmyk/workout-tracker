@@ -16,10 +16,10 @@ export function PlansStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: theme.colors.background },
+        headerStyle: { backgroundColor: theme.colors.gradientStart },
         headerTintColor: theme.colors.textPrimary,
         headerBackTitle: 'Back',
-        contentStyle: { backgroundColor: theme.colors.background },
+        contentStyle: { backgroundColor: 'transparent' },
       }}
     >
       <Stack.Screen name="SplitsList" component={SplitsListScreen} options={{ title: 'My Splits' }} />

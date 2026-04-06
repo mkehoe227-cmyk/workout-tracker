@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   primary: {
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.buttonPrimary,
   },
   outline: {
-    backgroundColor: 'transparent',
-    borderWidth: 1.5,
-    borderColor: theme.colors.accent,
+    backgroundColor: 'rgba(15, 32, 64, 0.4)',
+    borderWidth: 1,
+    borderColor: 'rgba(91, 163, 217, 0.3)',
   },
   pressed: {
     opacity: 0.65,

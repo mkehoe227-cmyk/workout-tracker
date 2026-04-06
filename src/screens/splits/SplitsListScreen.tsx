@@ -13,6 +13,8 @@ import { useAuth } from '../../hooks/useAuth';
 import { useSplits } from '../../hooks/useSplits';
 import type { PlansStackParamList } from '../../navigation/types';
 import type { Split } from '../../types';
+import { GradientBackground } from '../../components/GradientBackground';
+import { GlowCard } from '../../components/GlowCard';
 import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<PlansStackParamList>;
@@ -24,13 +26,16 @@ export function SplitsListScreen() {
 
   if (loading) {
     return (
-      <View style={styles.center}>
-        <ActivityIndicator color={theme.colors.accent} />
-      </View>
+      <GradientBackground>
+        <View style={styles.center}>
+          <ActivityIndicator color={theme.colors.accent} />
+        </View>
+      </GradientBackground>
     );
   }
 
   return (
+    <GradientBackground>
     <View style={styles.container}>
       {error ? <Text style={styles.error}>{error}</Text> : null}
 
@@ -52,43 +57,44 @@ export function SplitsListScreen() {
         <Text style={styles.fabText}>+</Text>
       </Pressable>
     </View>
+    </GradientBackground>
   );
 }
 
 function SplitCard({ split, nav }: { split: Split; nav: Nav }) {
   return (
-    <Pressable
-      style={styles.card}
-      onPress={() => nav.navigate('SplitDetail', { splitId: split.id })}
-    >
-      <View style={styles.cardMain}>
-        <Text style={styles.cardName}>{split.name}</Text>
-        {split.description ? (
-          <Text style={styles.cardDesc} numberOfLines={1}>{split.description}</Text>
-        ) : null}
-      </View>
-      <Text style={styles.cardArrow}>›</Text>
-    </Pressable>
+    <GlowCard style={styles.cardGlow}>
+      <Pressable
+        style={styles.card}
+        onPress={() => nav.navigate('SplitDetail', { splitId: split.id })}
+      >
+        <View style={styles.cardMain}>
+          <Text style={styles.cardName}>{split.name}</Text>
+          {split.description ? (
+            <Text style={styles.cardDesc} numberOfLines={1}>{split.description}</Text>
+          ) : null}
+        </View>
+        <Text style={styles.cardArrow}>›</Text>
+      </Pressable>
+    </GlowCard>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.background },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.colors.background },
+  container: { flex: 1 },
+  center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   list: { padding: theme.spacing.lg, paddingBottom: 100 },
   error: { color: theme.colors.error, textAlign: 'center', margin: 12 },
   empty: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 32 },
   emptyTitle: { color: theme.colors.textPrimary, fontSize: 20, fontWeight: '700', marginBottom: 8 },
   emptySub: { color: theme.colors.textSecondary, fontSize: 15, textAlign: 'center' },
+  cardGlow: {
+    marginBottom: 12,
+  },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radii.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
     padding: 16,
-    marginBottom: 12,
   },
   cardMain: { flex: 1 },
   cardName: { color: theme.colors.textPrimary, fontSize: 17, fontWeight: '600' },
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.buttonPrimary,
     borderWidth: 1,
     borderColor: theme.colors.accentDim,
     justifyContent: 'center',

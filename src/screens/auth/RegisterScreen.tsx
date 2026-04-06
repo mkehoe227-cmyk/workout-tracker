@@ -12,6 +12,7 @@ import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../../config/firebase';
 import { Button } from '../../components/ui/Button';
 import { TextInput } from '../../components/ui/TextInput';
+import { GradientBackground } from '../../components/GradientBackground';
 import type { RegisterScreenProps } from '../../navigation/types';
 import { theme } from '../../theme';
 
@@ -55,6 +56,7 @@ export function RegisterScreen({ navigation }: RegisterScreenProps) {
   }
 
   return (
+    <GradientBackground>
     <KeyboardAvoidingView
       style={styles.flex}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -101,11 +103,12 @@ export function RegisterScreen({ navigation }: RegisterScreenProps) {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  flex: { flex: 1, backgroundColor: theme.colors.background },
+  flex: { flex: 1 },
   container: {
     flexGrow: 1,
     justifyContent: 'center',

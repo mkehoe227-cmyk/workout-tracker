@@ -16,6 +16,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useWorkouts } from '../../hooks/useWorkouts';
 import { saveExercises, uploadExerciseImage, syncSharedExercise, mirrorCdnImageToStorage } from '../../services/splitsService';
 import { ImagePickerButton } from '../../components/plans/ImagePickerButton';
+import { GradientBackground } from '../../components/GradientBackground';
 import type { PlansStackParamList, ExerciseFormScreenProps } from '../../navigation/types';
 import type { Exercise } from '../../types';
 import { theme } from '../../theme';
@@ -182,6 +183,7 @@ export function ExerciseFormScreen() {
   const displayImage = localImageUri || imageUrl || null;
 
   return (
+    <GradientBackground>
     <KeyboardAvoidingView
       style={styles.flex}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -357,12 +359,13 @@ export function ExerciseFormScreen() {
         </Pressable>
       </ScrollView>
     </KeyboardAvoidingView>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  container: { flex: 1, backgroundColor: theme.colors.background },
+  container: { flex: 1 },
   content: { padding: theme.spacing.xl, paddingBottom: 40 },
   error: { color: theme.colors.error, marginBottom: 12, fontSize: 14 },
   sectionHeader: {
@@ -436,7 +439,7 @@ const styles = StyleSheet.create({
   },
   incrementInputActive: { borderColor: theme.colors.accent },
   saveBtn: {
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.buttonPrimary,
     borderRadius: theme.radii.lg,
     paddingVertical: 16,
     alignItems: 'center',

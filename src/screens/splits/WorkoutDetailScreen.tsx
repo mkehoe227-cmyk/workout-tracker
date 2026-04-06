@@ -16,6 +16,7 @@ import { saveExercises, removeExercise, progressMainWeight, progressBackoffWeigh
 import { ExerciseRow } from '../../components/plans/ExerciseRow';
 import type { PlansStackParamList, WorkoutDetailScreenProps } from '../../navigation/types';
 import type { Exercise } from '../../types';
+import { GradientBackground } from '../../components/GradientBackground';
 import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<PlansStackParamList>;
@@ -69,13 +70,16 @@ export function WorkoutDetailScreen() {
 
   if (loading || !workout) {
     return (
-      <View style={styles.center}>
-        <ActivityIndicator color={theme.colors.accent} />
-      </View>
+      <GradientBackground>
+        <View style={styles.center}>
+          <ActivityIndicator color={theme.colors.accent} />
+        </View>
+      </GradientBackground>
     );
   }
 
   return (
+    <GradientBackground>
     <View style={styles.container}>
       {workout.description ? (
         <Text style={styles.desc}>{workout.description}</Text>
@@ -120,12 +124,13 @@ export function WorkoutDetailScreen() {
         <Text style={styles.addBtnText}>+ Add Exercise</Text>
       </Pressable>
     </View>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.background },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.colors.background },
+  container: { flex: 1 },
+  center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   headerBtn: { color: theme.colors.accent, fontSize: 15, fontWeight: '500' },
   desc: { color: theme.colors.textSecondary, fontSize: 15, margin: 16, marginBottom: 8 },
   list: { padding: 16, paddingBottom: 100 },
@@ -137,7 +142,7 @@ const styles = StyleSheet.create({
     bottom: 28,
     left: 24,
     right: 24,
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.buttonPrimary,
     borderRadius: 14,
     paddingVertical: 16,
     alignItems: 'center',

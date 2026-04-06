@@ -19,6 +19,7 @@ import { progressMainWeight, progressBackoffWeight } from '../../services/splits
 import { saveSession } from '../../services/sessionsService';
 import type { LogStackParamList, ActiveSessionScreenProps } from '../../navigation/types';
 import type { Exercise, SessionExercise, SessionSet } from '../../types';
+import { GradientBackground } from '../../components/GradientBackground';
 import { theme } from '../../theme';
 
 type Nav = NativeStackNavigationProp<LogStackParamList>;
@@ -208,16 +209,19 @@ export function ActiveSessionScreen() {
 
   if (loading || !initialized || saving) {
     return (
-      <SafeAreaView style={styles.loadingContainer}>
-        <ActivityIndicator color={theme.colors.accent} size="large" />
-        {saving && <Text style={styles.savingText}>Saving session…</Text>}
-      </SafeAreaView>
+      <GradientBackground>
+        <SafeAreaView style={styles.loadingContainer}>
+          <ActivityIndicator color={theme.colors.accent} size="large" />
+          {saving && <Text style={styles.savingText}>Saving session…</Text>}
+        </SafeAreaView>
+      </GradientBackground>
     );
   }
 
   if (!currentExercise) return null;
 
   return (
+    <GradientBackground>
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
@@ -309,16 +313,16 @@ export function ActiveSessionScreen() {
         )}
       </View>
     </SafeAreaView>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.background },
+  container: { flex: 1 },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.colors.background,
   },
   savingText: {
     color: theme.colors.textSecondary,
@@ -435,7 +439,7 @@ const styles = StyleSheet.create({
   },
   doneBtn: {
     flex: 1,
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.buttonPrimary,
     borderRadius: theme.radii.lg,
     paddingVertical: 16,
     alignItems: 'center',
